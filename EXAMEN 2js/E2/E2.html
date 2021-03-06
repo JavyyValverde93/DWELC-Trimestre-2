@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="index.css">
+   <title>Document</title>
+
+</head>
+
+<body>
+   <label name="Texto Usuario1: " class="margenes">Texto Usuario1: </label>
+   <input id="texto1" type="text" class="margenes2">
+   <button id="botonAnadir1" class="margenes" onclick="nombre1()"> Añadir Texto Usuario1 </button>
+
+   <br />
+
+   <label name="Texto Usuario2: " class="margenes">Texto Usuario2: </label>
+   <input id="texto2" type="text" class="margenes2">
+   <button id="botonAnadir2" class="margenes" onclick="nombre2()"> Añadir Texto Usuario 2 </button>
+
+   <br />
+
+
+   <textarea id="textarea" class="margenes" rows=15> Chat: </textarea>
+   <button id="botonLimpiar" class="margenes" onclick="limpiar()"> Eliminar </button>
+
+
+   <br />
+
+   <script>
+      let usuario1;
+      let usuario2;
+
+      if(localStorage.getItem("chat")!=null){
+         document.getElementById("textarea").innerHTML = localStorage.getItem("chat");
+      }
+
+
+      function nombre1() {
+         chatUsu1 = document.getElementById("texto1").value;
+         if (localStorage.getItem("usuario1") == null) {
+            nom = prompt("Introduzca el nombre del usuario1", "nom");
+            localStorage.setItem("usuario1", nom);
+            usuario1 = nom;
+         } else {
+            usuario1 = localStorage.getItem("usuario1");
+         }
+         if(chatUsu1!=""){
+            anadirChat(usuario1, chatUsu1);
+         }
+      }
+
+      function nombre2(){
+         chatUsu2 = document.getElementById("texto2").value;
+         if (localStorage.getItem("usuario2") == null) {
+            nom = prompt("Introduzca el nombre del usuario2", "nom");
+            localStorage.setItem("usuario2", nom);
+            usuario2 = nom;
+         } else {
+            usuario2 = localStorage.getItem("usuario2");
+         }
+         if(chatUsu2!=""){
+            anadirChat(usuario2, chatUsu2);
+         }
+      }
+
+      function anadirChat(nom, mens){
+         chat = document.getElementById("textarea");
+
+         chat.innerHTML = chat.innerHTML + "\n" + nom + ": " + mens;
+         localStorage.setItem("chat", chat.innerHTML);
+      }
+
+      function limpiar(){
+         chat = document.getElementById("textarea");
+         chat.innerHTML = "";
+         localStorage.removeItem("chat");
+      }
+   </script>
+
+
+</body>
+
+</html>

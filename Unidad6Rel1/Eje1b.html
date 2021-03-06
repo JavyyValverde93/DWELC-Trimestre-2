@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function llamadaServidor(numSegundos, callback) {
+            setTimeout(function () {
+                console.log(`Llamada al servidor de ${numSegundos} sg.`);
+            }, numSegundos);
+            if(numSegundos>4000){
+                callback(null, numSegundos);
+            }else{
+                callback('nice', numSegundos);
+            }
+        }
+
+        llamadaServidor(2000, function(error, seg){
+            if(error){
+                errorT();
+            }else{
+                console.log('La primera llamada ha tardado '+seg);
+                llamadaServidor(3000, function(error, seg){
+                    if(error){
+                        errorT();
+                    }else{
+                        console.log('La segunda llamada ha tardado '+seg);
+                        llamadaServidor(4001, function(error, seg){
+                            if(error){
+                                errorT();
+                            }else{
+                                console.log('La tercera llamada ha tardado '+seg);
+                            }
+                        })
+                    }
+                })
+            }
+        });
+
+        function errorT(){
+            console.log('Error, debido a que la llamada tarda más de 4 segundos');
+        }
+
+    </script>
+</body>
+
+</html>

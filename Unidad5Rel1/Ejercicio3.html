@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DWELC</title>
+</head>
+
+<body>
+   <p>
+      No comas ajos ni cebollas, porque no saquen por el olor tu villanería. Anda despacio; habla con resposo; pero no de manera que parezca que te escuchas a ti mismo; que toda afectación es mala. Come poco y cena más poco; que la salud de todo el cuerpo se fragua en la oficina del estómago. Sé templado en el beber, considerando que el vino demasiado ni guarda secreto, ni cumple palabra. Ten cuenta, Sancho, de no mascar a dos carrillos, ni de erutar delante de nadie.
+   </p>
+   </br>
+   <p>
+      La libertad, Sancho, es uno de los más preciosos dones que a los hombres dieron los cielos; con ella no pueden igualarse los tesoros que encierra la tierra ni el mar encubre; por la libertad, así como por la honra se puede y debe aventurar la vida, y, por el contrario, el cautiverio es el mayor mal que puede venir a los hombres.
+   </p>
+
+   <script>
+      //Tarea 3.1 : Añade después del segundo texto un link con la url de la fuente de los textos:  https://wpd.ugr.es/~agamizv/?p=4   
+      document.getElementsByTagName("p")[1].innerHTML += "<a href=https://wpd.ugr.es/~agamizv/?p=4>https://wpd.ugr.es/~agamizv/?p=4</a>";
+
+      //Tarea 3.2 :  Añade después de cada punto (.) una nueva línea incluyendo el tag “p”.
+      var p = document.getElementsByTagName("p");
+      setTimeout(puntos, 0);
+
+      function puntos() {
+         p[0].innerHTML = p[0].innerHTML.split(".").join('.<p/>');
+      }
+
+      //Tarea 3.3 : Cuenta el número de palabras de los párrafos (podemos asumir que sean todas las palabras separadas por un espacio) y muestra el número en un elemento H1 que tendrás que crear y añadirlo antes de los 2 párrafos.
+      for (i = 0; i < p.length; i++) {
+         p[i].innerHTML = "<h1>Palabras:" + (p[i].innerHTML.split(" ").length - 9) + "</h1>" + p[i].innerHTML;
+      }
+
+      //Tarea 3.4 :  Busca por internet cómo subrayar texto con amarillo (en inglés llamado highlights) y haciendo uso de los métodos estudiados sobre manipulación del DOM subraye todas las palabras que sean mayores de 7 letras de amarillo.
+      var letra = "";
+      var esp = 1;
+      palabra = "";
+      let palabras7 = [];
+
+      BuscarPalabras();
+      esp = 2;
+      BuscarPalabras();
+
+      function BuscarPalabras() {
+         for (f = 0; f < p.length; f++) {
+            for (i = 0; i < p[f].innerHTML.length; i++) {
+               letra = p[f].innerHTML.charAt(i);
+               if (letra == " ") {
+                  if (esp == 1) {
+                     espacio1 = letra;
+                     esp = 2;
+                     palabra = "";
+                  } else {
+                     espacio2 = letra;
+                     esp = 1;
+                     if (palabra.length >= 7) {
+                        palabras7.push(palabra);
+                     }
+                  }
+               } else {
+                  if (letra != "," && letra != ";" && letra != "." && letra != ":") {
+                     palabra = palabra + letra;
+                  }
+               }
+            }
+         }
+      }
+
+      for (f = 0; f < p.length; f++) {
+         for (i = 0; i <= palabras7.length; i++) {
+            busqueda = palabras7[i];
+            p[f].innerHTML = p[f].innerHTML.replaceAll(busqueda, ("<u style='text-decoration:none; border-bottom:1px solid yellow; color: #000000;'>" + busqueda + "</u>"));
+         }
+      }
+   </script>
+</body>
+
+</html>

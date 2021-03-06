@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("GET", "datosTriangulo.json", true);
+        httpRequest.onload = obtenerDatosTriangulos;
+        httpRequest.overrideMimeType("text/plain");
+        httpRequest.send(null);
+
+        obtenerDatosTriangulos("datosTriangulo.json");
+
+        function obtenerDatosTriangulos(url){
+            if (httpRequest.readyState==4 && httpRequest.status==200){
+                callback(null);
+            }
+        }
+
+        function callback(n){
+            if(n==null){
+                data = JSON.parse(httpRequest.responseText).triangulos;
+
+                console.log(JSON.parse(httpRequest.responseText).triangulos);
+                calcularHipotenusa(data[0]);
+                return JSON.parse(httpRequest.responseText).triangulos;
+            }
+        }
+
+        function calcularHipotenusa( triangulo ){
+            setTimeout ( function() {
+                let hipotenusa = Math.hypot( triangulo.catetos[0] ,triangulo.catetos[1]  );  //Cateto1,Cateto2
+            } , 2000);
+        }
+
+        // function formatearTexto(triangulo ){
+        //     setTimeout ( function() { 
+            
+        //         let cadena = "Cateto 1 = " +     + "\n";
+        //         cadena += "Cateto 2 = " +  + "\n";
+        //         cadena += "Hipotenusa = " +  + "\n" ;
+        //         cadena += "Nombre = " +  + "\n";
+                
+        //     } , 2000);
+        // }
+
+       
+        
+
+    </script>
+</body>
+</html>

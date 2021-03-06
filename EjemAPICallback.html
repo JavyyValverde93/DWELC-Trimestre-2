@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="boton">Usuarios</button>
+
+    <img id="avatar" src="" alt="">
+    
+    <script src="api.js"></script>
+    
+    <script>
+
+        function pintarFoto(datos) {
+            if(datos){
+                let foto = datos.results[0].picture.large;
+                document.getElementById("avatar").src = foto;
+            }else{
+                alert("Fallo al mostrar la foto");
+            }
+        }
+
+        document.getElementById("boton").addEventListener("click", function(){
+            llamadaGetAPI("https://randomuser.me/api/", pintarFoto);
+        });
+        
+        
+
+        let lat;
+        let long;
+        let urlLocalizacion;
+
+        function pintarDatosUsuarios(datos) {
+            if(datos)
+            {
+                //PARSEAR - DESGRANAR
+                let usuarios = datos;
+                console.log("ID: " + usuarios[0].id);
+                console.log("NAME: " + usuarios[0].name);
+                console.log("ADDRESS: Calle: " + usuarios[0].address.street 
+                    +" Ciudad: "+ usuarios[0].address.city);
+
+                lat = usuarios[0].address.geo.lat; 
+                long = usuarios[0].address.geo.lng; 
+                
+                let urlLocalizacion= "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+lat+"&lon="+long;
+
+                /////SEGUNDA LLAMADA:
+        //        llamadaGetAPI(urlLocalizacion , comprobarLocalizacionUsuario);
+            }
+            else
+                console.log("Houston, ha habido un problema cargando datos del servidor");
+        }
+
+        function comprobarLocalizacionUsuario(datos) {
+            if(datos)
+                alert("La ciudad del usuario es: " + datos.address.city);
+            else
+                console.log("Ha habido un error en la segunda llamada.");
+        }
+
+        document.getElementById("boton").addEventListener("click", function(){
+            //llamadaGetAPI ( "https://jsonplaceholder.typicode.com/users", pintarDatosUsuarios);
+            llamadaGetAPI ( "https://randomuser.me/api/", );
+        });
+
+
+
+
+    </script>
+</body>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = procesarCambio;
+        httpRequest.open('GET', 'alumnos.xml', 'true');
+        httpRequest.send(null);
+
+        function procesarCambio() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE){
+                console.log("Estado actual:", httpRequest.readyState);
+
+                if (httpRequest.status === 200) {
+                    console.log("Se ha devuelto una respuesta correcta. Estado de  respuesta:", httpRequest.status);
+                    procesarRespuesta(httpRequest.responseText);
+                } else {
+                    console.log("Se ha producido un error en obtener la respuesta. Estado de respuesta: ", httpRequest.status);
+                }
+            } else {
+                console.log("No se ha devuelto la respuesta. Estado actual:", httpRequest.readyState);
+            }
+        }
+
+        function procesarRespuesta(resposta) {
+            var elementPre = document.createElement('pre');
+            elementPre.innerHTML = resposta;
+            document.body.appendChild(elementPre);
+        }
+    </script>
+
+</body>
+
+</html>

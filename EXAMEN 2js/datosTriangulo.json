@@ -1,0 +1,8 @@
+{
+    "triangulos":[
+        {"nombre":"equilatero", "catetos":[2.5, 2.5]},
+        {"nombre":"isosceles", "catetos":[3.5, 2.5]},
+        {"nombre":"escaleno", "catetos":[5.5, 2.5]}
+
+    ]
+}

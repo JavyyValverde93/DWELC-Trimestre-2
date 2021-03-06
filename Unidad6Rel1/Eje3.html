@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js";
+
+        function loadScript(src) {
+            let script = document.createElement('script');
+            script.src = src;
+
+            return new Promise(function(resolve, reject){
+                script.onload = resolve(script);
+                script.onload = resolve(console.log("esto tira"));
+                    resolve('Funciona');
+                    script.onerror = reject('Esto no tira');
+            });
+
+            document.head.append(script);
+        }
+
+        loadScript(src).then((r)=>{console.log('Esto tira')}).catch((f)=>console.log('Ruina'));
+    </script>
+
+</body>
+
+</html>

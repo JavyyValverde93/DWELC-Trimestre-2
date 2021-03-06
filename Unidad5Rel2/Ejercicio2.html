@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Documento</title>
+	<style>
+	div {
+    	width: 100px;
+    	height: 100px;
+    	border: 1px solid black;
+  	}
+ 	 
+  	.blanco {
+    	background-color: white;
+  	}
+ 	 
+  	.rojo {
+    	background-color: red;
+  	}
+ 	 
+  	.amarillo {
+    	background-color: yellow;
+  	}
+	</style>
+</head>
+<body>
+        <div id="prueba" tabindex=1></div>
+        
+        <script>
+            window.onload = inicio;
+
+            function inicio(){
+
+                window.addEventListener("keydown", function(e){
+                    e = e.key;
+                    if(e==="b"){
+                        document.getElementById("prueba").className = "blanco";
+                    }
+                    if(e==="r"){
+                        document.getElementById("prueba").className = "rojo";
+                    }
+                    if(e==="a"){
+                        document.getElementById("prueba").className = "amarillo";
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

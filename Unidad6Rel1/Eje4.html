@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Promise.race
+        p1 = new Promise(function (resolve, reject) {
+            setTimeout(() => resolve('1 + 1 son 7'), 1000);
+        });
+        p2 = new Promise((resolve, reject) => setTimeout(() => resolve('Quién me lo iba a decir'), 2000));
+
+        Promise.race([p1, p2]).then((p) => console.log(p+' quién me lo iba a decir')).catch((f) => console.log(f));
+
+        //Promise.all
+        p3 = new Promise(function (resolve, reject) {
+            setTimeout(() => resolve('Vikingos'), 2000);
+        });
+        p4 = new Promise((resolve, reject) => setTimeout(() => resolve('Los Serrano'), 1010));
+
+        Promise.all([p3, p4]).then(function(value){console.log(value)}).catch((f) => console.log(f));
+   
+    </script>
+
+</body>
+
+</html>

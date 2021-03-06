@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="nombre" placeholder="nombre">
+    <input id="valor" placeholder="valor">
+    <input id="dias" placeholder="dias">
+
+    <button id="setCookie">Set Cookie</button>
+    <button id="getCookie">Get Cookie</button>
+    <button id="remCookie">Remove Cookie</button>
+
+    <textarea id="cookies" rows="10" cols="20">
+
+    </textarea>
+
+    <script>
+        set = document.getElementById("setCookie").addEventListener("click", setCookie);
+        get = document.getElementById("getCookie").addEventListener("click", getCookie);
+        rem = document.getElementById("remCookie").addEventListener("click", remCookie);
+
+        mostrar();
+
+        function setCookie() {
+            nombre = document.getElementById("nombre").value;
+            valor = document.getElementById("valor").value;
+            dias = document.getElementById("dias").value;
+
+            let fecha = new Date();
+            if (dias == "") {
+                dias = 1;
+            }
+            fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
+
+            co = nombre + "=" + valor + "; expires=" + fecha.toUTCString;
+            document.cookie = co;
+            console.log("Cookie creada");
+            mostrar();
+        }
+
+        function getCookie() {
+            nombre = document.getElementById("nombre").value;
+            valor = document.getElementById("valor").value;
+            dias = document.getElementById("dias").value;
+
+            var name = nombre + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var listado = decodedCookie.split(';');
+            for (var i = 0; i < listado.length; i++) {
+                var c = listado[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    x = c.substring(name.length, c.length);
+                    console.log(name + x);
+                    document.getElementById("cookies").innerHTML = name + x;
+                    return c.substring(name.length, c.length);
+                }
+            }
+            document.getElementById("cookies").innerHTML = "Cookie no encontrada";
+            return "";
+        }
+
+        function remCookie() {
+            nombre = document.getElementById("nombre").value;
+
+            document.cookie = nombre + "=;  expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            console.log(document.cookie);
+            mostrar();
+        }
+
+        function mostrar(){
+            document.getElementById("cookies").innerHTML = document.cookie;
+        }
+    </script>
+
+</body>
+
+</html>

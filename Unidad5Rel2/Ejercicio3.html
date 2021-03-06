@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ejercicio 1 - DOM básico y atributos HTML</title>
+</head>
+
+<body>
+    <div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc, posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis, faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.
+        </p>
+    </div>
+    <div>
+        <button id="boton1" onclick="ControlarClick(this)">Botón1</button>
+        <button id="boton2" onclick="ControlarClick(this)">Botón2</button>
+    </div>
+
+    <script>
+        window.onload = inicio;
+
+        function ControlarClick(e){
+            if(e.id!=undefined){
+                alert("El id del botón es: "+e.id);
+            }
+        }
+
+        function color(e){
+            if(e.type=="mouseout"){
+                p.innerHTML = Contenido[0];
+            }
+            if(e.type=="mouseover"){
+                Contenido[0] = p.innerHTML;
+                p.innerHTML = "<font color='yellow'>"+p.innerHTML+"</font>";
+            }
+        }
+
+        function inicio(){
+            p = document.getElementsByTagName("p")[0];
+            Contenido = [];
+
+            p.addEventListener("mouseover", function(e){color(e)});
+            p.addEventListener("mouseout", function(e){color(e)});
+        }
+    </script>
+</body>
+</html>
+        

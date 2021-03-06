@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>DWELC</title>
+</head>
+
+<body>
+    <div class="container ">
+        <div id="norte">
+            <h2>Galicia</h2>
+            <ul id="lista">
+                <li>A Coruña</li>
+                <li>Lugo</li>
+                <li>Ourense</li>
+                <li>Pontevedra</li>
+            </ul>
+        </div>
+        <div id="sur">
+            <h2>Canarias</h2>
+            <ul id="lista">
+                <li>Santa Cruz de Tenerife</li>
+                <li>Las Palmas</li>
+            </ul>
+        </div>
+        <div id="texto"></div>
+
+
+        <script>
+            window.onload = iniciar;
+
+            function iniciar() {
+                var norte = document.getElementById('norte');
+                var sur = document.getElementById('sur');
+
+                norte.onclick = function () {
+                    mostrar(norte, "norte");
+                }
+
+                sur.onclick = function () {
+                    mostrar(sur, "sur");
+                }
+
+                function mostrar(lugar, n) {
+                    let provincias = lugar.getElementsByTagName('li');
+                    var num = provincias.length;
+                    var mensaje = "Has elegido " + lugar.getElementsByTagName('h2')[0].innerHTML +
+                        " que está situada en el " + n +
+                        "<p>El número de provincias es " + num + ": ";
+                    for (i = 0; i < provincias.length; i++) {
+                        mensaje = mensaje + provincias[i].innerHTML + " ";
+                    }
+                    document.getElementById('texto').innerHTML = mensaje;
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

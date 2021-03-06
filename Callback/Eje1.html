@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<body>
+    <script>
+        orden = ["primera", "segunda", "tercera"];
+
+        function llamadaServidor( numSegundos , callback){
+            setTimeout( function() { console.log(`Llamada al servidor de ${numSegundos} sg.`); 
+                callback(numSegundos);
+            }, numSegundos );
+        }
+        
+        function callback(numSegundos){
+            console.log(`La ${orden[0]} llamada ha tardado `, numSegundos);
+            orden.shift();
+        }
+
+        seg = 2000;
+        for(i=0; i<orden.length; i++){
+            llamadaServidor(seg, callback);
+            seg += 1000;
+            if(orden.length == 0){
+                console.log("Hemos terminado, todo perfecto");
+            }
+        }
+
+    </script>
+
+
+    
+</body>
+</html>

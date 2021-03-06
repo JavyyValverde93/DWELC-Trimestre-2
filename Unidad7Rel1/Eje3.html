@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+
+<body>
+    <div class="small-container">
+        <h1>Probando sistemas de almacenamiento</h1>
+        <form>
+            <input id="item" type="text" placeholder="New">
+            <button type="button" onclick="inicio()">Procesar</button>
+        </form>
+        <h2>Elementos</h2>
+        <ul id="lista"></ul>
+        <button onclick="eliminar()">Limpiar todo</button>
+    </div>
+
+    <script>
+        let array = [];
+
+        if (localStorage.getItem("Eje3")) {
+            array = JSON.parse(localStorage.getItem("Eje3"));
+        }
+        // Probé a hacerlo con el intro pero, se mostraba la lista 1 milésima de segundo, se recargaba 
+        // la página y al final del enlace se añade una interrogación, pensé que con el evento 
+        // onchange iría, creo que este fue el problema que usted tuvo, pero con su código tambien me fallaba
+        function inicio() {
+            document.getElementsByTagName("ul")[0].innerHTML = "";
+            for (a = 0; a < array.length; a++) {
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(array[a]));
+                lista.appendChild(li);
+            }
+            valor = document.getElementById("item").value;
+            if (valor == "") {
+                alert("No hay valor");
+            } else {
+                array.push(valor);
+                i = array.length - 1;
+
+                let li = document.createElement("li");
+                li.appendChild(document.createTextNode(array[i]));
+                lista.appendChild(li);
+
+                localStorage.setItem("Eje3", JSON.stringify(array));
+            }
+
+        }
+
+        function eliminar() {
+            localStorage.removeItem("Eje3");
+            array = [];
+            document.getElementsByTagName("ul")[0].innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>
